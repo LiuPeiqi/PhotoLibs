@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhotosCopy", "PhotosCopy\PhotosCopy.vcxproj", "{78CA806F-76D5-4C1A-8C45-9193E214AAF0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ListPhotos", "ListPhotos\ListPhotos.vcxproj", "{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{78CA806F-76D5-4C1A-8C45-9193E214AAF0}.Release|x64.Build.0 = Release|x64
 		{78CA806F-76D5-4C1A-8C45-9193E214AAF0}.Release|x86.ActiveCfg = Release|Win32
 		{78CA806F-76D5-4C1A-8C45-9193E214AAF0}.Release|x86.Build.0 = Release|Win32
+		{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}.Debug|x64.ActiveCfg = Debug|x64
+		{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}.Debug|x64.Build.0 = Debug|x64
+		{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}.Debug|x86.ActiveCfg = Debug|Win32
+		{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}.Debug|x86.Build.0 = Debug|Win32
+		{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}.Release|x64.ActiveCfg = Release|x64
+		{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}.Release|x64.Build.0 = Release|x64
+		{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}.Release|x86.ActiveCfg = Release|Win32
+		{8E8C7EA6-C2D8-41C0-9A43-AB877C374D75}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

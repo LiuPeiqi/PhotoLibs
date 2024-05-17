@@ -40,6 +40,10 @@ public:
     }
 
     const Path& GetPath() const noexcept { return path; }
+    const Path GetFileName() const noexcept { return path.filename(); }
+    const size_t GetSize() const noexcept { return file_size; }
+    const Time& GetWriteTime() const noexcept { return last_write_time; }
+
 
 protected:
     Path path;
@@ -90,7 +94,7 @@ int main(int argc, Char** argv) {
     Path destination(argv[2]);
 
     std::vector<FileInfo> src_files;
-    std::set<FileInfo> des_files;
+    std::map<Path, FileInfo> des_files;
     src_files.reserve(256);
     auto filter_all = [](const auto&) { return true; };
 
@@ -98,18 +102,27 @@ int main(int argc, Char** argv) {
              std::bind(&std::vector<FileInfo>::emplace_back<const Path&, const Time&, size_t>, &src_files, Holder::_1,
                        Holder::_2, Holder::_3),
              filter_all);
-    Traverse(destination,
-             std::bind(&std::set<FileInfo>::emplace<const Path&, const Time&, size_t>, &des_files, Holder::_1,
-                       Holder::_2, Holder::_3),
-             filter_all);
-    auto Order   = [](const FileInfo& left, const FileInfo& right) { return left < right; };
-    size_t count = 0;
+    Traverse(
+        destination,
+        [&des_files](const Path& path, const Time& time, size_t size) {
+            des_files.emplace(std::make_pair(path.filename(), FileInfo{path, time, size}));
+        },
+        filter_all);
+    //auto Order      = [](const FileInfo& left, const FileInfo& right) { return left < right; };
+    size_t count    = 0;
+    auto end_of_des = des_files.end();
     for (const auto& file : src_files) {
-        if (des_files.find(file) != des_files.end()) {
-            ++count;
+        auto iter = des_files.find(file.GetFileName());
+        if (iter == end_of_des) {
+            std::cout << "Missing:" << file.GetPath() << std::endl;
             continue;
         }
-        std::cout << "Missing:" << file.GetPath() << std::endl;
+        if (iter->second.GetSize() == file.GetSize() && iter->second.GetWriteTime() == file.GetWriteTime()) {
+            ++count;
+        } else {
+            std::cout << std::format("Meta mismatch: {} vs {}\n", file.GetPath().string(),
+                                     iter->second.GetPath().string());
+        }
     }
     std::cout << "Find count:" << count;
     return 0;
